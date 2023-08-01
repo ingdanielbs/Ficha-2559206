@@ -62,4 +62,16 @@ class Jugador {
       print('El jugador no existe');
     }
   }
+
+  static playerDelete(){
+    print('Ingrese el id:');
+    int id = int.parse(stdin.readLineSync()!);
+    Jugador? result = search(id, jugadores); 
+    if ( result != null) {
+      jugadores.remove(result);
+      print('El jugador ${result.name} fue eliminado');        
+    }else{
+      print('El jugador no existe');
+    }
+  }
 }
