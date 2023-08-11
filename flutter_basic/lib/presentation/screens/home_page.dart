@@ -7,14 +7,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mi aplicación'),
+        title: const Text('Mi aplicación'),
       ),
-      drawer: Drawer(),
-      body: const Center(
+      drawer: const Drawer(),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
@@ -27,7 +27,20 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            Text('Otro texto')
+            const Text('Otro texto'),
+            SizedBox(height: 70,),
+            Container(
+              width: 280,
+              height: 280,
+              color: Colors.amber,
+              child: const Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Contenedor1 '),
+                  Text('Contenedor1 '),
+                ],
+              )),
+            )
           ],
         ),        
       ),
