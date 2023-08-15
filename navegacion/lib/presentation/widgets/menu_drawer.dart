@@ -10,7 +10,7 @@ class MenuDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             decoration: BoxDecoration(color: Colors.deepOrange),
             child: Text(
               'Menú',
@@ -18,25 +18,25 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home Page'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home Page'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(),
+                  builder: (context) => const HomePage(),
                 ),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Second Page'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Second Page'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SecondPage(),
+                  builder: (context) => const SecondPage(),
                 ),
               );
             },
