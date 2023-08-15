@@ -8,9 +8,18 @@ class MenuAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: const Text('Navegación'),
       backgroundColor: Colors.deepOrange,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.person,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
-  
-  @override  
+
+  @override
   Size get preferredSize => const Size(0, kToolbarHeight);
 }

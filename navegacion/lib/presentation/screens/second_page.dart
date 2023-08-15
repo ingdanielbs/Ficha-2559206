@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navegacion/presentation/widgets/menu_appbar.dart';
+import 'package:navegacion/presentation/widgets/menu_drawer.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
@@ -7,7 +8,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: MenuDrawer(),
       appBar: MenuAppbar(),
       body: Center(
           child: Column(

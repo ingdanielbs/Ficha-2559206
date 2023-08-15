@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navegacion/presentation/screens/second_page.dart';
 import 'package:navegacion/presentation/widgets/menu_appbar.dart';
+import 'package:navegacion/presentation/widgets/menu_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,7 +9,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MenuAppbar(),
+      drawer: const MenuDrawer(),
+      appBar: const MenuAppbar(),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
