@@ -15,10 +15,15 @@ class DoctorHomeScreen extends StatefulWidget {
 }
 
 class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
-
   final TextEditingController _searchController = TextEditingController();
 
   List<Doctor> filterItems = doctores;
+
+  void searchItem(String text){
+    setState(() {
+      filterItems = doctores.where((i) => i.name.toLowerCase().contains(text.toLowerCase())).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
       appBar: const AppbarMenu(title: 'Doctores'),
       body: Column(
         children: [
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -41,11 +48,10 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
+              onChanged: searchItem,
               controller: _searchController,
               decoration: const InputDecoration(
-                labelText: 'Buscar',
-                prefixIcon: Icon(Icons.search)
-              ),
+                  labelText: 'Buscar', prefixIcon: Icon(Icons.search)),
             ),
           ),
           Expanded(
@@ -56,19 +62,55 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               itemCount: filterItems.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: (){                    
+                  onTap: () {
+                    showDialog(                    
+                      context: context, 
+                      builder: (context){
+                        return AlertDialog(                          
+                          title: Text('${filterItems[index].name} ${filterItems[index].lastName}'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.file(
+                            File(filterItems[index].photo),                        
+                          ),
+                          const SizedBox(height: 20,),
+                          Text('${filterItems[index].name} ${filterItems[index].lastName}'),
+                          Text(filterItems[index].speciality),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, child: Text('Cerrar'))
+                          ],
+                        );
+                      });
                   },
                   child: Card(
                     child: Column(
                       children: [
-                        Image.file(File(filterItems[index].photo),),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.file(
+                            File(filterItems[index].photo),
+                            height: 70,
+                            width: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Text(
+                          '${filterItems[index].name} ${filterItems[index].lastName}',
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                        )
                         /* Image.network(filterItems[index].photo) */
                       ],
-                    ) ,
+                    ),
                   ),
                 );
               },
-            ),)
+            ),
+          )
         ],
       ),
     );
