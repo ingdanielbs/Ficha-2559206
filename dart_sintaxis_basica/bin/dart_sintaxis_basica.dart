@@ -49,7 +49,7 @@ void main(List<String> args) {
   var compuutadora = opciones[Random().nextInt(3)];
 
   //piedra, papel, tijera
-  print('Escribe tu opción');
+  /* print('Escribe tu opción');
   var opcion = stdin.readLineSync()!;
   print('Computadora: $compuutadora');
   if(opcion == compuutadora){
@@ -62,6 +62,31 @@ void main(List<String> args) {
     print('Ganaste');
   }else{
     print('Perdiste');
-  }
+  } */
+  /* numero();
+  print('El numero ingresado es ${num()}'); */
 
+  parImpar(num());
+
+}
+
+void numero(){
+  print('Ingresa un numero');
+  int num = int.parse(stdin.readLineSync()!);
+  print('El numero ingresado es $num');
+}
+
+int num(){
+  print('Ingresa un numero');
+  int num = int.parse(stdin.readLineSync()!);
+  return num;
+}  
+
+void parImpar(int numero){
+  if(numero % 2 == 0){
+    print('El numero $numero es par');
+  }
+  else{
+    print('El numero $numero es impar');
+  }
 }
