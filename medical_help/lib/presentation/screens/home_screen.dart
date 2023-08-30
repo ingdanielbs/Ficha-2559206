@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical_help/presentation/screens/doctor_home_screen.dart';
+import 'package:medical_help/presentation/screens/product_home_screen.dart';
 import 'package:medical_help/presentation/widgets/appbar_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,7 +74,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: const Color.fromARGB(255, 218, 229, 237),
                         borderRadius: BorderRadius.circular(10)),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProductHomeScreen(),
+                          ),
+                        );
+                      },
                       icon: const Icon(
                         Icons.local_hospital,
                         size: 50,
