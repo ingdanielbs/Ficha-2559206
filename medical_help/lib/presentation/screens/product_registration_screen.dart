@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medical_help/datos/products_list.dart';
 import 'package:medical_help/dominio/models/product.dart';
+import 'package:medical_help/presentation/screens/home_screen.dart';
 import 'package:medical_help/presentation/widgets/appbar_menu.dart';
 
 class ProductRegistrationScreen extends StatefulWidget {
@@ -95,30 +96,35 @@ class _ProductRegistrationScreenState extends State<ProductRegistrationScreen> {
                   ),
                 ),
                 if (image.isNotEmpty)
-                /* Image.network(image) */ /* Para navegador */
-                Image.file(
-                  File(image),
-                ),
-
-                ElevatedButton(onPressed: (){
-                  if (_formKey.currentState!.validate()) {
-                    var NewProduct = Product(
-                      name: _nameController.text,
-                      description: _descriptionController.text,
-                      price: double.parse(_priceController.text),
-                      stock: int.parse(_stockController.text),
-                      image: image
-                    );
-                    products.add(NewProduct);
-                  }
-                }, child: const Text('Registrar')),
-                
+                  /* Image.network(image) */ /* Para navegador */
+                  Image.file(
+                    File(image),
+                  ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        var newProduct = Product(
+                            name: _nameController.text,
+                            description: _descriptionController.text,
+                            price: double.parse(_priceController.text),
+                            stock: int.parse(_stockController.text),
+                            image: image);
+                        products.add(newProduct);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Registro exitoso')),
+                        );
+                      }
+                    },
+                    child: const Text('Registrar')),
               ],
-            )
-            ),
+            )),
       ),
-
-      
     );
   }
 }

@@ -19,9 +19,11 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
   List<Doctor> filterItems = doctores;
 
-  void searchItem(String text){
+  void searchItem(String text) {
     setState(() {
-      filterItems = doctores.where((i) => i.name.toLowerCase().contains(text.toLowerCase())).toList();
+      filterItems = doctores
+          .where((i) => i.name.toLowerCase().contains(text.toLowerCase()))
+          .toList();
     });
   }
 
@@ -63,29 +65,35 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    showDialog(                    
-                      context: context, 
-                      builder: (context){
-                        return AlertDialog(                          
-                          title: Text('${filterItems[index].name} ${filterItems[index].lastName}'),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.file(
-                            File(filterItems[index].photo),                        
-                          ),
-                          const SizedBox(height: 20,),
-                          Text('${filterItems[index].name} ${filterItems[index].lastName}'),
-                          Text(filterItems[index].speciality),
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                                '${filterItems[index].name} ${filterItems[index].lastName}'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.file(
+                                  File(filterItems[index].photo),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                    '${filterItems[index].name} ${filterItems[index].lastName}'),
+                                Text(filterItems[index].speciality),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Cerrar'))
                             ],
-                          ),
-                          actions: [
-                            TextButton(onPressed: (){
-                              Navigator.pop(context);
-                            }, child: Text('Cerrar'))
-                          ],
-                        );
-                      });
+                          );
+                        });
                   },
                   child: Card(
                     child: Column(
@@ -101,7 +109,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         ),
                         Text(
                           '${filterItems[index].name} ${filterItems[index].lastName}',
-                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12),
                         )
                         /* Image.network(filterItems[index].photo) */
                       ],
