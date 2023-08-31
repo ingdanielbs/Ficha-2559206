@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:medical_help/presentation/screens/cart_home.dart';
 import 'package:medical_help/presentation/screens/product_registration_screen.dart';
 import 'package:medical_help/presentation/widgets/appbar_menu.dart';
 
@@ -18,6 +19,7 @@ class _ProductHomeScreenState extends State<ProductHomeScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   List<Product> filterItems = products;
+  List<Product> cart = [];
 
   void searchItem(String text) {
     setState(() {
@@ -27,8 +29,33 @@ class _ProductHomeScreenState extends State<ProductHomeScreen> {
     });
   }
 
+  void increaseQuantity(Product prod) {
+    if (prod.quantity < prod.stock) {
+      setState(() {
+        prod.quantity++;
+      });
+    }
+  }
+
+  void decreaseQuantity(Product prod) {
+    if (prod.quantity > 0) {
+      setState(() {
+        prod.quantity--;
+      });
+    }
+  }
+
+  void addCart(Product prod) {
+    if (!cart.contains(prod) && prod.quantity > 0) {
+      setState(() {
+        cart.add(prod);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    int cartLength = cart.length;
     return Scaffold(
       appBar: const AppbarMenu(title: 'Productos'),
       body: Column(
@@ -63,6 +90,7 @@ class _ProductHomeScreenState extends State<ProductHomeScreen> {
               itemCount: filterItems.length,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -134,26 +162,47 @@ class _ProductHomeScreenState extends State<ProductHomeScreen> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            decreaseQuantity(filterItems[index]);
+                          },
                           icon: const Icon(Icons.remove),
                         ),
                         Text('${filterItems[index].quantity}'),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            increaseQuantity(filterItems[index]);
+                          },
                           icon: const Icon(Icons.add),
                         ),
                       ],
                     ),
                     IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.add_shopping_cart),
-                        ),
+                        onPressed: () {
+                          addCart(filterItems[index]);
+                        },
+                        icon: cart.contains(filterItems[index])
+                            ? const Icon(Icons.check_box)
+                            : const Icon(Icons.add_shopping_cart)),
                   ],
                 );
               },
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CartHome(
+                cart: cart,
+              ),
+            ),
+          );
+        },
+        child: Row(
+            children: [const Icon(Icons.shopping_cart), Text('$cartLength')]),
       ),
     );
   }
