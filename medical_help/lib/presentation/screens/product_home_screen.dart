@@ -199,7 +199,9 @@ class _ProductHomeScreenState extends State<ProductHomeScreen> {
                 cart: cart,
               ),
             ),
-          );
+          ).then((value) => setState(() {
+            cartLength = cart.length;
+          }));
         },
         child: Row(
             children: [const Icon(Icons.shopping_cart), Text('$cartLength')]),

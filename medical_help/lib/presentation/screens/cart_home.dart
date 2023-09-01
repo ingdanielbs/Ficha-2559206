@@ -15,6 +15,8 @@ class CartHome extends StatefulWidget {
 class _CartHomeState extends State<CartHome> {
   @override
   Widget build(BuildContext context) {
+    double total =
+        widget.cart.fold(0, (sum, item) => sum + (item.quantity * item.price));
     return Scaffold(
       appBar: const AppbarMenu(title: 'Carrito'),
       body: ListView.builder(
@@ -33,11 +35,32 @@ class _CartHomeState extends State<CartHome> {
               Text(
                   ' ${widget.cart[index].price * widget.cart[index].quantity}'),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      widget.cart.removeAt(index);
+                    });
+                  },
                   icon: const Icon(Icons.remove_shopping_cart))
             ],
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          if(widget.cart.isNotEmpty){
+            setState(() {
+            widget.cart.clear();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Compra exitosa'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.pop(context);
+          });
+          }
+        },
+        label: Text('Total: \$$total'),
       ),
     );
   }
