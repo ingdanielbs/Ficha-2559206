@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_help/dominio/models/image_list.dart';
 import 'package:medical_help/presentation/screens/doctor_home_screen.dart';
 import 'package:medical_help/presentation/screens/product_home_screen.dart';
 import 'package:medical_help/presentation/widgets/appbar_menu.dart';
@@ -93,6 +95,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ],
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          const Text(
+            'Productos destacados',
+            style: TextStyle(
+                color: Color.fromARGB(255, 178, 174, 62), fontSize: 18),
+          ),
+          CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              aspectRatio: 2.0,
+              enlargeCenterPage: true,
+            ),
+            items: imageSliders,
           ),
         ],
       ),
