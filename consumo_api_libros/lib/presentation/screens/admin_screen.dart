@@ -1,3 +1,4 @@
+import 'package:consumo_api_libros/presentation/screens/admin_user_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -17,10 +18,7 @@ class _AdminScreenState extends State<AdminScreen> {
       'Index 0: Home',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    AdminUserScreen(),
     Text(
       'Index 2: School',
       style: optionStyle,
